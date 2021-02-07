@@ -132,13 +132,17 @@ h3 {
 
 /* Footer formatting starts here */
 
+#page-container{
+    position: relative;
+    min-height: 100vh;
+}
+
 #Footer {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     background-color: #303439;
     color: #bbbbbb;
-
     height: 30px;
     bottom:0;
     left:0;

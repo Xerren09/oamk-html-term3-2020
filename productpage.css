@@ -135,6 +135,11 @@ h3 {
 
 /* Footer formatting starts here */
 
+#page-container{
+    position: relative;
+    min-height: 100vh;
+}
+
 #Footer {
     display: flex;
     flex-direction: row;
@@ -146,7 +151,7 @@ h3 {
     bottom:0;
     left:0;
     width:100%;
-    /*position: absolute;*/
+    position: absolute;
 }
 
 #Footer a {

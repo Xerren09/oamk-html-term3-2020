@@ -10,8 +10,8 @@
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap" rel="stylesheet">
     </head>
     <body>
-        <!-- Page headers start here -->
-        <div>
+        <div id="page-container">
+            <!-- Page headers start here -->
             <div id="HeaderContainer">
                 <div id="HeaderBar">
                     <div class="Group">
@@ -43,36 +43,28 @@
                 </div>
                 <div id="MenuBar">
                     <button id="Btn_Left" title="Home" onclick="window.location.href='index.html'"> <b>Home</b> </button>
-                    <button title="Games and media" onclick="window.location.href='error.html'"> <b>Games and Media</b> </button>
+                    <button title="Games and media" onclick="window.location.href='error.html'"> <b>Games and Media</b>
+                    </button>
                     <button title="Cooling" onclick="window.location.href='error.html'"> <b>Cooling</b> </button>
                     <button title="Accessories" onclick="window.location.href='error.html'"> <b>Accessories</b> </button>
                     <button id="Btn_Right" title="Spare parts" onclick="window.location.href='error.html'"> <b>Spare Parts</b>
                     </button>
                 </div>
             </div>
-            
             <!-- Page content starts here -->
-            
             <div id="Content">
-            
                 <div>
-                    <img src="resources/Images/frontpage_banner.jpg" height="100%" width="100%"
-                        alt="">
-                </div>
-            
+                    <img src="resources/Images/frontpage_banner.jpg" height="100%" width="100%" alt="">
+                </div>    
                 <div id="ItemFrame">
                     <!-- Product cards come here -->
-                </div>
-            
+                </div>    
+            </div>
+            <!-- Page footer starts here -->
+            <div id="Footer">
+                <a href="https://www.freepik.com/vectors/background">Background vector created by starline - www.freepik.com</a>
             </div>
         </div>
-
-        <!-- Page footer starts here -->
-
-        <div id="Footer">
-            <a href="https://www.freepik.com/vectors/background">Background vector created by starline - www.freepik.com</a>
-        </div>
-
         <script>
             const _data = [
                 {
@@ -85,11 +77,27 @@
                 },
 
                 {
-                    name: 'ASUS GeForce RTX 3070 8GB DUAL',
-                    price: '599',
-                    image: 'resources/Images/302003-b303045_300x300.jpg',
+                    name: 'ASUS TUF GAMING RTX 3080 10G',
+                    price: '899',
+                    image: 'resources/Images/rtx3080tuf.jpg',
                     description: [
-                        ''
+                        'Graphics engine: NVIDIA® GeForce RTX™ 3080' ,
+                        'Bus standard: PCI Express 4.0',
+                        'OpenGL: OpenGL®4.6',
+                        'Video memory: GGDDR6X',
+                        'Memory speed: 19 Gbps',
+                        'Memory interface: 320-bit',
+                        'Engine clock: OC Mode - 1740 MHz (Boost Clock)',
+                        'Gaming Mode (Default) - GPU Boost Clock : 1710 MHz , GPU Base Clock : 1440 MHz',
+                        'CUDA core: 8704',
+                        'Resolution: Digital max resolution: 7680x4320',
+                        'Interface: 2x HDMI 2.1 port, 3x DisplayPort 1.4a, HDCP support',
+                        'Maximum displays supported: 4',
+                        'NVlink support: No',
+                        'Recommended PSU: 850W',
+                        'Power connectors: 2 x 8-pin',
+                        'Accessories: 1 x Collection card, 1 x Speedsetup manual',
+                        '1 x TUF certificate of Reliability'
                     ]
                 },
 
@@ -155,24 +163,25 @@
                         ''
                     ]
                 }
-                ];
+            ];
 
             var _cart = [];
 
             pupulateTiles();
 
             function pupulateTiles() {
-                for (let i = 0; i < _data.length; i++)
-                {
+                for (let i = 0; i < _data.length; i++) {
                     addItemToPage(i, _data[i].image, _data[i].name, _data[i].price);
                 }
-                /*_cart.length = 0;
-                _cart = JSON.parse(sessionStorage.getItem("_cart"));
-                if (!_cart.length) { }
-                else { document.getElementById("CartLink").textContent = " Cart: " + (_cart.length); }*/
+                if (JSON.parse(sessionStorage.getItem("_cart")) != null) {
+                    _cart = JSON.parse(sessionStorage.getItem("_cart"));
+                }
+                if (!_cart.length) { /*---*/ }
+                else { document.getElementById("CartLink").textContent = " Cart: " + (_cart.length); }
+                console.log("Pog");
             }
-            
-            function addItemToPage(itemID, imagePath, itemName, itemPrice){
+
+            function addItemToPage(itemID, imagePath, itemName, itemPrice) {
                 let frame = document.createElement('div');
                 frame.classList.add('ItemContainer');
 
@@ -191,13 +200,13 @@
                 titleLink.append(document.createTextNode(itemName));
 
                 let priceHeading = document.createElement('h3');
-                priceHeading.append(document.createTextNode(itemPrice+" €"));
+                priceHeading.append(document.createTextNode(itemPrice + " €"));
 
                 let addToCartButton = document.createElement('button');
-                addToCartButton.classList.add("addToCartButton");
-                addToCartButton.id= itemID;
-                addToCartButton.onclick = function() { addToCart(parseInt(itemID))};
-                addToCartButton.textContent = "Add";
+                addToCartButton.classList.add("AddToCartBtn");
+                addToCartButton.id = itemID;
+                addToCartButton.onclick = function () { addToCart(parseInt(itemID)) };
+                addToCartButton.textContent = "Add to cart";
 
                 frame.append(item);
                 item.append(image);
@@ -215,6 +224,5 @@
                 document.getElementById("CartLink").textContent = " Cart: " + (_cart.length);
             }
         </script>
-
     </body>
 </html>

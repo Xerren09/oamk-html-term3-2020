@@ -12,8 +12,8 @@
         <script type="text/javascript" scr="./dataManager.js"></script>
     </head>
     <body>
-        <!-- Page headers start here -->
-        <div>
+        <div id="page-container">
+            <!-- Page headers start here -->
             <div id="HeaderContainer">
                 <div id="HeaderBar">
                     <div class="Group">
@@ -33,7 +33,7 @@
                             <a id="Create_Account" href="error.html"> Create an account </a>
                         </div>
                         <div id="Cart">
-                            <a id="CartLink" href="cart.html"> <i class="fa fa-shopping-cart"></i> Cart: 1</a>
+                            <a id="CartLink" href="cart.html"> <i class="fa fa-shopping-cart"></i> Cart: 0</a>
                         </div>
                         <div id="SearchBar">
                             <form action="error.html">
@@ -45,18 +45,16 @@
                 </div>
                 <div id="MenuBar">
                     <button id="Btn_Left" title="Home" onclick="window.location.href='index.html'"> <b>Home</b> </button>
-                    <button title="Games and media" onclick="window.location.href='error.html'"> <b>Games and Media</b> </button>
+                    <button title="Games and media" onclick="window.location.href='error.html'"> <b>Games and Media</b>
+                    </button>
                     <button title="Cooling" onclick="window.location.href='error.html'"> <b>Cooling</b> </button>
                     <button title="Accessories" onclick="window.location.href='error.html'"> <b>Accessories</b> </button>
                     <button id="Btn_Right" title="Spare parts" onclick="window.location.href='error.html'"> <b>Spare Parts</b>
                     </button>
                 </div>
             </div>
-            
             <!-- Page content starts here -->
-            
             <div id="Content">
-            
                 <div id="rectangle">
                     <img class="ItemImg" src="resources/Images/rtx3080tuf.jpg">
                     <div id="ItemDescription">
@@ -69,7 +67,8 @@
                         <hr>
                         <div id="CartControl">
                             <input type="number" id="_itemNumberJS" value="1" min="1">
-                            <button id="AddToCart" onClick="dataManager.js:AddItemToCart();"> ADD TO CART </button> <!--onClick="AddItemToCart"-->
+                            <button id="AddToCart" onClick="addToCart(0);"> ADD TO CART </button>
+                            <!--onClick="AddItemToCart"-->
                             <!-- Add to card script goes here with values _itemNameJS, _itemPriceJS, _itemNumberJS -->
                         </div>
                         <hr>
@@ -98,34 +97,35 @@
                     </div>
                 </div>
             </div>
+            <!-- Page footer starts here -->
+            <div id="Footer">
+                <a href="https://www.freepik.com/vectors/background">Background vector created by starline - www.freepik.com</a>
+            </div>
         </div>
-
-        <!-- Page footer starts here -->
-
-        <div id="Footer">
-            <a href="https://www.freepik.com/vectors/background">Background vector created by starline - www.freepik.com</a>
-        </div>
-
         <script>
             var _cart = [];
 
             updateCart();
 
             function updateCart(){
-                _cart.length = 0;
-                _cart = JSON.parse(sessionStorage.getItem("_cart"));
-                let cartCount = document.getElementById("CartLink");
-                cartCount.textContent = " Cart: ";
-                if (_cart.length <= 0) {
-                    cartCount.textContent += ("0");
+                //
+                if (JSON.parse(sessionStorage.getItem("_cart")) != null) {
+                    _cart = JSON.parse(sessionStorage.getItem("_cart"));
                 }
-                else {
-                    cartCount.textContent += (_cart.length);
+                if (!_cart.length) {
+                    document.getElementById("CartLink").textContent = " Cart: " + (0);
                 }
+                else { document.getElementById("CartLink").textContent = " Cart: " + (_cart.length); }
+                //
             }
 
-            function addToCart(){
-                
+            function addToCart(_itemID){
+                let count = document.getElementById("_itemNumberJS").value;
+                for (let i = 0; i < parseInt(count); i++) {
+                    _cart.push(_itemID);
+                }
+                sessionStorage.setItem("_cart", JSON.stringify(_cart));
+                document.getElementById("CartLink").textContent = " Cart: " + (_cart.length);
             }
         </script>
         

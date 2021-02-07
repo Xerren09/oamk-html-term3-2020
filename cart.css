@@ -14,11 +14,6 @@ body {
     position:relative;
 }
 
-h1 {
-    font-size: 30px;
-    color: #303439;
-}
-
 h2 {
     font-size: 17px;
     color:#5f6062;
@@ -138,18 +133,22 @@ h3 {
 
 /* Footer formatting starts here */
 
+#page-container{
+    position: relative;
+    min-height: 100vh;
+}
+
 #Footer {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     background-color: #303439;
     color: #bbbbbb;
-
     height: 30px;
     bottom:0;
     left:0;
     width:100%;
-    /*position: absolute;*/
+    position: absolute;
 }
 
 #Footer a {
