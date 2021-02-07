@@ -4,7 +4,7 @@
         <title>GPU Store</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
-        <link rel="stylesheet" href="home.css" />
+        <link rel="stylesheet" href="index.css" />
         <link rel="stylesheet" href="fontawesome-free-5.15.1-web/css/all.css">
         <link rel="preconnect" href="https://fonts.gstatic.com">
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap" rel="stylesheet">
@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div id="MenuBar">
-                    <button id="Btn_Left" title="Home" onclick="window.location.href='home.html'"> <b>Home</b> </button>
+                    <button id="Btn_Left" title="Home" onclick="window.location.href='index.html'"> <b>Home</b> </button>
                     <button title="Games and media" onclick="window.location.href='error.html'"> <b>Games and Media</b> </button>
                     <button title="Cooling" onclick="window.location.href='error.html'"> <b>Cooling</b> </button>
                     <button title="Accessories" onclick="window.location.href='error.html'"> <b>Accessories</b> </button>
@@ -56,7 +56,7 @@
             <div id="Content">
             
                 <div>
-                    <img src="msi-5f033292b1e08-msi-geforce_rtx_20_super-banner_1920x550-master.jpg" height="100%" width="100%"
+                    <img src="resources/Images/frontpage_banner.jpg" height="100%" width="100%"
                         alt="">
                 </div>
             
@@ -166,10 +166,10 @@
                 {
                     addItemToPage(i, _data[i].image, _data[i].name, _data[i].price);
                 }
-                _cart.length = 0;
+                /*_cart.length = 0;
                 _cart = JSON.parse(sessionStorage.getItem("_cart"));
-                if (!_cart.length) { /*empty*/ }
-                else { document.getElementById("CartLink").textContent = " Cart: " + (_cart.length); }
+                if (!_cart.length) { }
+                else { document.getElementById("CartLink").textContent = " Cart: " + (_cart.length); }*/
             }
             
             function addItemToPage(itemID, imagePath, itemName, itemPrice){
