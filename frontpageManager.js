@@ -231,7 +231,6 @@ function pupulateTiles() {
     }
     if (!_cart.length) { /*---*/ }
     else { document.getElementById("CartLink").textContent = " Cart: " + (_cart.length); }
-    console.log("Pog");
 }
 
 function addItemToPage(itemID, imagePath, itemName, itemPrice) {
