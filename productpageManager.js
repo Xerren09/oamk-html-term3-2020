@@ -2,6 +2,7 @@ var _data = [];
 
 var _cart = [];
 
+//downloads _data array contents from remote file
 function getData() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -14,6 +15,7 @@ function getData() {
     xhttp.send();
 }
 
+//gets the target id previously set! However in case it got none, it just redirects to the first product in the central array
 function getPageID() {
     if (sessionStorage.getItem("_referer") != null) {
         let _referer = sessionStorage.getItem("_referer");
@@ -24,6 +26,7 @@ function getPageID() {
     }
 }
 
+//generates the page's contents based on the id passed on from other pages (gets it from getPageID())
 function generatePageContents(_itemID) {
     let frame = document.createElement('div');
     frame.id = "rectangle";
@@ -100,6 +103,7 @@ function generatePageContents(_itemID) {
     updateCart();
 }
 
+//as usual, displays how many items are in the cart
 function updateCart() {
     //
     if (JSON.parse(sessionStorage.getItem("_cart")) != null) {
@@ -112,6 +116,7 @@ function updateCart() {
     //
 }
 
+//adds items to the cart, automated to also be aware of the quantity the user choses
 function addToCart(_itemID) {
     let count = document.getElementById("_itemNumberJS").value;
     for (let i = 0; i < parseInt(count); i++) {

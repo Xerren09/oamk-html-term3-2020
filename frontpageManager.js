@@ -2,6 +2,7 @@ var _data = [];
 
 var _cart = [];
 
+//downloads _data array contents from remote file
 function getData() { 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -14,6 +15,7 @@ function getData() {
     xhttp.send(); 
 }
 
+//main logic handling frontpage generation
 function pupulateTiles() {
     for (let i = 0; i < _data.length; i++) {
         addItemToPage(i, _data[i].image, _data[i].name, _data[i].price);
@@ -25,6 +27,7 @@ function pupulateTiles() {
     else { document.getElementById("CartLink").textContent = " Cart: " + (_cart.length); }
 }
 
+//generates product tiles from _data
 function addItemToPage(itemID, imagePath, itemName, itemPrice) {
     let frame = document.createElement('div');
     frame.classList.add('ItemContainer');
@@ -63,12 +66,14 @@ function addItemToPage(itemID, imagePath, itemName, itemPrice) {
     document.getElementById('ItemFrame').append(frame);
 }
 
+//little function responsible for adding items to the cart
 function addToCart(_itemID) {
     _cart.push(_itemID);
     sessionStorage.setItem("_cart", JSON.stringify(_cart));
     document.getElementById("CartLink").textContent = " Cart: " + (_cart.length);
 }
 
+//sets a target id when clicking a link so productpageManager.js knows which item to display
 function setPageReferer(_ID) {
     sessionStorage.setItem("_referer", _ID.toString());
 }

@@ -2,6 +2,7 @@ var _data = [];
 
 var _cart = [];
 
+//downloads _data array contents from remote file
 function getData() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function () {
@@ -14,10 +15,13 @@ function getData() {
     xhttp.send();
 }
 
+//main logic generating the list of products in the cart
 function populateCartList() {
+    //safety check in case _cart is not defined in sessionStorage
     if (JSON.parse(sessionStorage.getItem("_cart")) != null) {
         _cart = JSON.parse(sessionStorage.getItem("_cart"));
     }
+    //hacky logic for when the cart is empty
     if (!_cart.length) {
         generateCartItem(0, "NoItem", "Your cart is empty. Products will show up here after you added them.", "0");
     }
@@ -29,6 +33,7 @@ function populateCartList() {
     updatePriceNCart();
 }
 
+//calculates total price of the cart, then updates the appropriate labels
 function updatePriceNCart() {
     let totalPrice = 0;
     for (let i = 0; i < _cart.length; i++) {
@@ -45,11 +50,12 @@ function updatePriceNCart() {
     }
 }
 
+//function dealing with removing items from the cart
 function removeFromCart(removeID) {
     _cart.splice(removeID, 1);
     sessionStorage.setItem("_cart", JSON.stringify(_cart));
     document.getElementById(removeID).remove();
-    //
+    // yucky solution to an even yuckier problem: array index misalignments
     let _cartElementList = document.getElementsByClassName("ListItem");
     for (let i = removeID; i < _cartElementList.length; i++) {
         let _newid = parseInt(_cartElementList[i].id) - 1;
@@ -63,6 +69,7 @@ function removeFromCart(removeID) {
     updatePriceNCart();
 }
 
+//generates html code for products in the cart
 function generateCartItem(_itemID, _imagePath, _itemName, _itemPrice) {
 
     let cartItem = document.createElement('div');
@@ -83,6 +90,7 @@ function generateCartItem(_itemID, _imagePath, _itemName, _itemPrice) {
 
     let titleHeading = document.createElement('h2');
 
+    //logic for when the cart is empty
     if (_imagePath != "NoItem") {
         let image = document.createElement('img');
         image.classList.add('ItemImg');
@@ -122,6 +130,7 @@ function generateCartItem(_itemID, _imagePath, _itemName, _itemPrice) {
     document.getElementById('ItemList').append(cartItem);
 }
 
+//sets a target id when clicking a link so productpageManager.js knows which item to display
 function setPageReferer(_ID) {
     sessionStorage.setItem("_referer", _ID.toString());
 }
